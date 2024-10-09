@@ -3,6 +3,8 @@
 // Start session 
 session_start();
 
+$isAdmin = isset($_SESSION['is_admin']) && $_SESSION['is_admin'];
+
 
 // Sets default variable values if session is not set
 if (!isset($_SESSION['name'])) {
@@ -44,5 +46,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <input type="submit" value="Save Changes">
     </form>
+
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <?php if ($isAdmin): ?>
+            <a href="./pages/logout.php">Logout</a>
+        <?php else: ?>
+            <a href="./pages/login.php">Admin Login</a>
+        <?php endif; ?>
+
 </body>
 </html>
