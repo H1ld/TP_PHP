@@ -29,24 +29,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>CV Hub - Login</title>
+    <link rel="stylesheet" href="../assets/styles/styles.css">
 </head>
 <body>
-    <div class="container">
-        <h2>Admin Login</h2>
-        <?php if (isset($error)): ?>
-            <p style="color:red;"><?php echo $error; ?></p>
-        <?php endif; ?>
-        <form method="POST" action="">
+    
+    <?php include 'header.php' ?>
+
+    <main class="container">
+        <h1>Login</h1>
+        <form action="" method="post">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
             
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
             
-            <input type="submit" value="Login">
+            <button type="submit" value="Login" class="btn">Login</button>
         </form>
-    </div>
+        <p>Don't have an account? <a href="signup.html">Sign up</a></p>
+    </main>
+
+    <?php include 'footer.php' ?>
+
 </body>
 </html>

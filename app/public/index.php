@@ -26,37 +26,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
-    <link rel="stylesheet" href="/assets/styles/landingPage.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Hub - Home</title>
+    <link rel="stylesheet" href="assets/styles/styles.css">
 </head>
 <body>
-    <H1> Hello <?php echo $_SESSION['name']; ?> </h1>
-    <p> Email: <?php echo $_SESSION['email']; ?> </p>
+    <?php include 'pages/header.php' ?>
 
-    <br>
-    <br>
+    <main class="container">
+        <h1>Welcome to CV Hub</h1>
+        <p>Showcase your skills and projects to potential employers.</p>
+        
+        <section>
+            <h2>Featured CVs</h2>
+            <div class="featured-cvs">
+                <div class="cv-card">
+                    <h3>John Doe 1</h3>
+                    <p>Software Developer</p>
+                    <a href="pages/profile.php" class="btn">View Profile</a>
+                </div>
+                <div class="cv-card">
+                    <h3>John Doe 2</h3>
+                    <p>Software Developer</p>
+                    <a href="pages/profile.php" class="btn">View Profile</a>
+                </div>
+                <div class="cv-card">
+                    <h3>John Doe 3</h3>
+                    <p>Software Developer</p>
+                    <a href="pages/profile.php" class="btn">View Profile</a>
+                </div>
+            </div>
+        </section>
+        
+        <a href="signup.html" class="btn">Get Started</a>
+    </main>
 
-    <h2>Edit</h2>
-    <form method="POST" action="">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name">
-
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email">
-
-        <input type="submit" value="Save Changes">
-    </form>
-
-    <br>
-    <br>
-    <br>
-    <br>
-
-    <?php if ($isAdmin): ?>
-            <a href="./pages/logout.php">Logout</a>
-        <?php else: ?>
-            <a href="./pages/login.php">Admin Login</a>
-        <?php endif; ?>
+    <?php include 'pages/footer.php' ?>
 
 </body>
 </html>
