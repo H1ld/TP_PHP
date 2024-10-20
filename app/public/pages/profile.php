@@ -1,4 +1,7 @@
 <?php
+
+include '../data/object.php';
+
 // Sets default variable values if session is not set
 if (!isset($_SESSION['name'])) {
     $_SESSION['name'] = "defaultName";
@@ -7,9 +10,18 @@ if (!isset($_SESSION['name'])) {
 
 // Modifies variable when form is sent
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $_SESSION['name'] = $_POST['name'];
-    $_SESSION['email'] = $_POST['email'];
+    if(isset($_POST['projectName']) && isset($_POST['projectDescription'])){
+        $newProject = new Project($_POST['projectName'], $_POST['projectDescription']);
+    $_SESSION['projects'][] = $newProject;  // Add to the session-stored array
+    } elseif (isset($_POST['removeProject'])) {
+        $index = $_POST['removeProject'];
+        array_splice($_SESSION['projects'], $index, 1);
+        $_SESSION['projects']= array_values($_SESSION['projects']); //Re-index the array
+    }
+    header("Refresh:0");
 }
+
+$projects = $_SESSION['projects'];
 ?>
 
 
@@ -38,34 +50,44 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <h2>Your Projects</h2>
             <button id="add-project-btn" class="btn">Add New Project</button>
             <ul class="project-list">
-                <li class="project-item">
-                    <div class="project-content">
-                        <h3>Project 1</h3>
-                        <p>Description of Project 1</p>
-                    </div>
-                    <button class="delete-btn">Delete</button>
-                </li>
-                <li class="project-item">
-                    <div class="project-content">
-                        <h3>Project 2</h3>
-                        <p>Description of Project 2</p>
-                    </div>
-                    <button class="delete-btn">Delete</button>
-                </li>
+
+                <?php foreach ($projects as $index => $project): ?>
+                    <li class="project-item">
+                        <div class="project-content">
+                            <h3><?php echo $project->get_name(); ?></h3>
+                            <p><?php echo $project->get_description(); ?></p>
+                        </div>
+
+                        <form method="post">
+                            <input type="hidden" name="removeProject" value="<?php echo $index; ?>">
+                            <button type="submit" class="delete-btn">Remove</button>
+                        </form>
+
+
+                    </li>
+                <?php endforeach; ?>
+
             </ul>
         </section>
     </main>
+    <?php
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        echo "POST WORKING";
+     } else {
+       echo "Not working";
+     }
+    ?>
 
     <div id="add-project-popup" class="popup">
         <div class="popup-content">
             <span class="close">&times;</span>
             <h2>Add New Project</h2>
-            <form id="add-project-form">
-                <label for="project-name">Project Name:</label>
-                <input type="text" id="project-name" name="project-name" required>
+            <form id="add-project-form" method="POST">
+                <label for="projectName">Project Name:</label>
+                <input type="text" id="projectName" name="projectName" value="" required>
                 
-                <label for="project-description">Project Description:</label>
-                <textarea id="project-description" name="project-description" required></textarea>
+                <label for="projectDescription">Project Description:</label>
+                <textarea id="projectDescription" name="projectDescription" value="" required></textarea>
                 
                 <button type="submit" class="btn">Add Project</button>
             </form>
@@ -73,6 +95,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 
     <?php include 'footer.php' ?>
+
+
+
+
+
+
 
     <script>
         const addProjectBtn = document.getElementById('add-project-btn');
@@ -91,44 +119,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (e.target === addProjectPopup) {
                 addProjectPopup.style.display = 'none';
             }
-        });
-
-        document.getElementById('add-project-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const name = document.getElementById('project-name').value;
-            const description = document.getElementById('project-description').value;
-            
-            const projectList = document.querySelector('.project-list');
-            const newProject = document.createElement('li');
-            newProject.className = 'project-item';
-            newProject.innerHTML = `
-                <div class="project-content">
-                    <h3>${name}</h3>
-                    <p>${description}</p>
-                </div>
-                <button class="delete-btn">Delete</button>
-            `;
-            projectList.appendChild(newProject);
-            
-            // Add event listener to the new delete button
-            newProject.querySelector('.delete-btn').addEventListener('click', deleteProject);
-            
-            // Clear form and close popup
-            e.target.reset();
-            addProjectPopup.style.display = 'none';
-        });
-
-        // Function to delete a project
-        function deleteProject(e) {
-            const projectItem = e.target.closest('.project-item');
-            if (projectItem) {
-                projectItem.remove();
-            }
-        }
-
-        // Add event listeners to existing delete buttons
-        document.querySelectorAll('.delete-btn').forEach(button => {
-            button.addEventListener('click', deleteProject);
         });
     </script>
 </body>
