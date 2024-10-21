@@ -158,3 +158,11 @@ input, textarea {
     cursor: pointer;
     font-size: 20px;
 }
+
+/*
+################# global #################
+*/
+
+#error {
+    color: red;
+}

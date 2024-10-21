@@ -1,3 +1,20 @@
+<?php
+    include '../data/data.php';
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if(isset($_POST['fullname']) && isset($_POST['email']) && isset($_POST['password'])){
+            if($_POST['password'] == $_POST['confirmPassword']){
+                $newUser = new User($_POST['fullname'], $_POST['password'], $_POST['email'], FALSE);
+                $users[] = $newUser;
+                saveUsersCookie($users);
+                header("Location: profile.php");
+            } else {
+                $error = "Password confirmation does not match!";
+            }
+        }  
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,22 +29,29 @@
 
     <main class="container">
         <h1>Sign Up</h1>
-        <form action="profile.html" method="get">
+        <form method="post">
             <label for="fullname">Full Name:</label>
-            <input type="text" id="fullname" name="fullname" required>
-
+            <input type="text" id="fullname" name="fullname" required
+                value="<?php echo isset($_POST['fullname']) ? htmlspecialchars($_POST['fullname']) : ''; ?>"> <!--keeps the values from the previous form-->
+                
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+            <input type="email" id="email" name="email" required 
+                value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>"> <!--keeps the values from the previous form-->
             
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
             
-            <label for="confirm-password">Confirm Password:</label>
-            <input type="password" id="confirm-password" name="confirm-password" required>
+            <label for="confirmPassword">Confirm Password:</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" required>
+
+            <?php if (isset($error)): ?>
+                <p id="error"><?php echo $error; ?></p>
+            <?php endif; ?>
             
             <button type="submit" class="btn">Sign Up</button>
         </form>
         <p>Already have an account? <a href="login.html">Login</a></p>
+
     </main>
 
     <?php include 'footer.php' ?>

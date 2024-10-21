@@ -1,6 +1,6 @@
 <?php
 
-include '../data/object.php';
+include '../data/data.php';
 
 // Sets default variable values if session is not set
 if (!isset($_SESSION['name'])) {
@@ -11,8 +11,12 @@ if (!isset($_SESSION['name'])) {
 // Modifies variable when form is sent
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if(isset($_POST['projectName']) && isset($_POST['projectDescription'])){
+
         $newProject = new Project($_POST['projectName'], $_POST['projectDescription']);
-    $_SESSION['projects'][] = $newProject;  // Add to the session-stored array
+        $projects[] = $newProject;
+        saveProjectsCookie($projects);
+        header("Refresh:0");
+
     } elseif (isset($_POST['removeProject'])) {
         $index = $_POST['removeProject'];
         array_splice($_SESSION['projects'], $index, 1);
@@ -21,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     header("Refresh:0");
 }
 
-$projects = $_SESSION['projects'];
+//$projects = $_SESSION['projects'];
 ?>
 
 
@@ -70,13 +74,6 @@ $projects = $_SESSION['projects'];
             </ul>
         </section>
     </main>
-    <?php
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        echo "POST WORKING";
-     } else {
-       echo "Not working";
-     }
-    ?>
 
     <div id="add-project-popup" class="popup">
         <div class="popup-content">
