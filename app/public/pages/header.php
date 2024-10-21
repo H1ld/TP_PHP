@@ -7,7 +7,7 @@ $base_url = '/';
 
         <h1><a href="http://127.0.0.1/index.php">CV-land</a>
 
-        <?php if (isset($_SESSION['is_admin']) &&  $_SESSION['is_admin']): ?>
+        <?php if (isset($_SESSION['isLoggedIn']) &&  $_SESSION['isLoggedIn']): ?>
             - <?php echo $_SESSION['name']; ?>
         <?php endif; ?>
     
@@ -16,7 +16,7 @@ $base_url = '/';
         <nav>
             <ul>
                 <li><a href="<?php echo $base_url; ?>index.php">Home</a></li>
-                <?php if (isset($_SESSION['is_admin']) &&  $_SESSION['is_admin']): ?>
+                <?php if (isset($_SESSION['isLoggedIn']) &&  $_SESSION['isLoggedIn']): ?>
                     <li><a href="<?php echo $base_url; ?>pages/logout.php">Log out</a></li>
                     <li><a href="<?php echo $base_url; ?>pages/profile.php">Profile</a></li>
                 <?php else: ?>

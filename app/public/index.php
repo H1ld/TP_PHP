@@ -1,23 +1,5 @@
 <?php
-
-// Start session 
-session_start();
-
-$isAdmin = isset($_SESSION['is_admin']) && $_SESSION['is_admin'];
-
-
-// Sets default variable values if session is not set
-if (!isset($_SESSION['name'])) {
-    $_SESSION['name'] = "defaultName";
-    $_SESSION['email'] = "defaultMail";
-}
-
-// Modifies variable when form is sent
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $_SESSION['name'] = $_POST['name'];
-    $_SESSION['email'] = $_POST['email'];
-}
-
+include 'data/data.php';
 ?>
 
 

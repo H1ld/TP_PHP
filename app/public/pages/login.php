@@ -1,26 +1,25 @@
 <?php
-// Start the session
-session_start();
-
-// Hardcoded credentials for the admin user
-$adminUsername = "admin";
-$adminPassword = "password123";
+include '../data/data.php';
 
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
 
-    // Validate credentials
-    if ($username === $adminUsername && $password === $adminPassword) {
-        // Set session for admin user
-        $_SESSION['is_admin'] = true;
-        // Redirect to the CV page
-        header("Location: ../index.php");
-        exit;
-    } else {
+    foreach ($users as $user){
+        if ($_POST['username'] == $user->getUsername() && $_POST['password'] == $user->getPassword()) {
+            $_SESSION['name'] = $user->getUsername();
+            $_SESSION['email'] = $user->getEmail();
+            $_SESSION['is_admin'] = $user->isAdmin();
+            $_SESSION['isLoggedIn'] = TRUE;
+
+            $found = TRUE;
+            break;
+        }
+    }
+
+    if (!isset($found)) {
         $error = "Invalid username or password!";
     }
+
 }
 ?>
 
@@ -47,7 +46,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             
             <button type="submit" value="Login" class="btn">Login</button>
         </form>
+
+        <?php if (isset($error)): ?>
+            <p id="error"><?php echo $error; ?></p>
+        <?php endif; ?>
+
         <p>Don't have an account? <a href="signup.html">Sign up</a></p>
+
+
+        
+        <table>
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+            </tr>
+            <?php foreach ($users as $user): ?>
+            <tr>
+                <td><?php echo htmlspecialchars($user->getUsername()); ?></td>
+                <td><?php echo htmlspecialchars($user->getEmail()); ?></td>
+            </tr>
+            <?php endforeach; ?>
+        </table>
+
     </main>
 
     <?php include 'footer.php' ?>

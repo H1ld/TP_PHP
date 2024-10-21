@@ -15,17 +15,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $newProject = new Project($_POST['projectName'], $_POST['projectDescription']);
         $projects[] = $newProject;
         saveProjectsCookie($projects);
-        header("Refresh:0");
 
     } elseif (isset($_POST['removeProject'])) {
         $index = $_POST['removeProject'];
-        array_splice($_SESSION['projects'], $index, 1);
-        $_SESSION['projects']= array_values($_SESSION['projects']); //Re-index the array
+        array_splice($projects, $index, 1);
+        $projects= array_values($projects); //Re-index the array
+        saveProjectsCookie($projects);
     }
     header("Refresh:0");
 }
-
-//$projects = $_SESSION['projects'];
 ?>
 
 
