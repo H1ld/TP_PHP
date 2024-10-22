@@ -65,7 +65,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <button type="submit" class="delete-btn">Remove</button>
                         </form>
 
-
                     </li>
                 <?php endforeach; ?>
 
@@ -91,30 +90,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <?php include 'footer.php' ?>
 
-
-
-
-
-
-
-    <script>
-        const addProjectBtn = document.getElementById('add-project-btn');
-        const addProjectPopup = document.getElementById('add-project-popup');
-        const closePopup = document.querySelector('.close');
-
-        addProjectBtn.addEventListener('click', () => {
-            addProjectPopup.style.display = 'flex';
-        });
-
-        closePopup.addEventListener('click', () => {
-            addProjectPopup.style.display = 'none';
-        });
-
-        window.addEventListener('click', (e) => {
-            if (e.target === addProjectPopup) {
-                addProjectPopup.style.display = 'none';
-            }
-        });
-    </script>
+    <script src="/app/public/assets/js/profile.js"></script> 
 </body>
 </html>
