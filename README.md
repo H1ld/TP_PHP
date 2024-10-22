@@ -44,6 +44,7 @@ docker-compose up
 - [x] Pages & navigation
 - [x] Data storage in cookies
 - [x] Basic account creation
+- [x] Admin panel
 - [ ] Link projects to users
 - [ ] Create an editable CV page for each user
 - [ ] Display profiles and projects on home page
