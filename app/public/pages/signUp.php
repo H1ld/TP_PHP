@@ -1,18 +1,7 @@
 <?php
     include '../data/data.php';
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        if(isset($_POST['fullname']) && isset($_POST['email']) && isset($_POST['password'])){
-            if($_POST['password'] == $_POST['confirmPassword']){
-                $newUser = new User($_POST['fullname'], $_POST['password'], $_POST['email'], FALSE);
-                $users[] = $newUser;
-                saveUsersCookie($users);
-                header("Location: profile.php");
-            } else {
-                $error = "Password confirmation does not match!";
-            }
-        }  
-    }
+    include '../actions/handleSignUp.php';
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +14,7 @@
 </head>
 <body>
 
-    <?php include 'header.php' ?>
+    <?php include 'includes/header.php' ?>
 
     <main class="container">
         <h1>Sign Up</h1>
@@ -54,7 +43,7 @@
 
     </main>
 
-    <?php include 'footer.php' ?>
+    <?php include 'includes/footer.php' ?>
 
 </body>
 </html>

@@ -2,27 +2,12 @@
 
 include '../data/data.php';
 
+include '../actions/handleProfile.php';
+
 // Sets default variable values if session is not set
 if (!isset($_SESSION['name'])) {
     $_SESSION['name'] = "defaultName";
     $_SESSION['email'] = "defaultMail";
-}
-
-// Modifies variable when form is sent
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if(isset($_POST['projectName']) && isset($_POST['projectDescription'])){
-
-        $newProject = new Project($_POST['projectName'], $_POST['projectDescription']);
-        $projects[] = $newProject;
-        saveProjectsCookie($projects);
-
-    } elseif (isset($_POST['removeProject'])) {
-        $index = $_POST['removeProject'];
-        array_splice($projects, $index, 1);
-        $projects= array_values($projects); //Re-index the array
-        saveProjectsCookie($projects);
-    }
-    header("Refresh:0");
 }
 ?>
 
@@ -36,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="../assets/styles/styles.css">
 </head>
 <body>
-    <?php include 'header.php' ?>
+    <?php include 'includes/header.php' ?>
 
     <main class="container">
         <h1>Your Profile</h1>
@@ -88,8 +73,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </div>
 
-    <?php include 'footer.php' ?>
+    <?php include 'includes/footer.php' ?>
 
-    <script src="/app/public/assets/js/profile.js"></script> 
+    <script src="/assets/js/profile.js"></script> 
 </body>
 </html>

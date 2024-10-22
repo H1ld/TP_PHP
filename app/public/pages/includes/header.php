@@ -1,7 +1,3 @@
-<?php
-$base_url = '/';
-?>
-
 <header>
     <div class="container">
 
@@ -15,13 +11,13 @@ $base_url = '/';
         
         <nav>
             <ul>
-                <li><a href="<?php echo $base_url; ?>index.php">Home</a></li>
+                <li><a href="/index.php">Home</a></li>
                 <?php if (isset($_SESSION['isLoggedIn']) &&  $_SESSION['isLoggedIn']): ?>
-                    <li><a href="<?php echo $base_url; ?>pages/logout.php">Log out</a></li>
-                    <li><a href="<?php echo $base_url; ?>pages/profile.php">Profile</a></li>
+                    <li><a href="/actions/logout.php">Log out</a></li>
+                    <li><a href="/pages/profile.php">Profile</a></li>
                 <?php else: ?>
-                    <li><a href="<?php echo $base_url; ?>pages/login.php">Login</a></li>
-                    <li><a href="<?php echo $base_url; ?>pages/signUp.php">Sign Up</a></li>
+                    <li><a href="/pages/login.php">Login</a></li>
+                    <li><a href="/pages/signUp.php">Sign Up</a></li>
                 <?php endif; ?>
             </ul>
         </nav>

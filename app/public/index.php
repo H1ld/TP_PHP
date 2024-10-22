@@ -13,11 +13,11 @@ include 'data/data.php';
     <link rel="stylesheet" href="assets/styles/styles.css">
 </head>
 <body>
-    <?php include 'pages/header.php' ?>
+    <?php include 'pages/includes/header.php' ?>
 
     <main class="container">
         <h1>Welcome to CV Hub</h1>
-        <p>Showcase your skills and projects to potential employers.</p>
+        <p>Showcase your skills and projects.</p>
         
         <section>
             <h2>Featured CVs</h2>
@@ -43,7 +43,7 @@ include 'data/data.php';
         <a href="signup.html" class="btn">Get Started</a>
     </main>
 
-    <?php include 'pages/footer.php' ?>
+    <?php include 'pages/includes/footer.php' ?>
 
 </body>
 </html>
