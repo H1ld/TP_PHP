@@ -34,21 +34,6 @@ include '../actions/handleLogIn.php';
 
         <p>Don't have an account? <a href="signup.html">Sign up</a></p>
 
-
-        
-        <table>
-            <tr>
-                <th>Username</th>
-                <th>Email</th>
-            </tr>
-            <?php foreach ($users as $user): ?>
-            <tr>
-                <td><?php echo htmlspecialchars($user->getUsername()); ?></td>
-                <td><?php echo htmlspecialchars($user->getEmail()); ?></td>
-            </tr>
-            <?php endforeach; ?>
-        </table>
-
     </main>
 
     <?php include 'includes/footer.php' ?>

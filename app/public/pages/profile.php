@@ -41,8 +41,8 @@ if (!isset($_SESSION['name'])) {
                 <?php foreach ($projects as $index => $project): ?>
                     <li class="project-item">
                         <div class="project-content">
-                            <h3><?php echo $project->get_name(); ?></h3>
-                            <p><?php echo $project->get_description(); ?></p>
+                            <h3><?php echo $project->getName(); ?></h3>
+                            <p><?php echo $project->getDescription(); ?></p>
                         </div>
 
                         <form method="post">

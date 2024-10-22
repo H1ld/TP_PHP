@@ -11,6 +11,9 @@
         
         <nav>
             <ul>
+                <?php if (isset($_SESSION['isAdmin']) &&  $_SESSION['isAdmin']): ?>
+                    <li><a href="/db.php">data</a></li>
+                <?php endif; ?>
                 <li><a href="/index.php">Home</a></li>
                 <?php if (isset($_SESSION['isLoggedIn']) &&  $_SESSION['isLoggedIn']): ?>
                     <li><a href="/actions/logout.php">Log out</a></li>

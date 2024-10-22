@@ -4,7 +4,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($_POST['username'] == $user->getUsername() && $_POST['password'] == $user->getPassword()) {
             $_SESSION['name'] = $user->getUsername();
             $_SESSION['email'] = $user->getEmail();
-            $_SESSION['is_admin'] = $user->isAdmin();
+            $_SESSION['isAdmin'] = $user->isAdmin();
             $_SESSION['isLoggedIn'] = TRUE;
 
             $found = TRUE;

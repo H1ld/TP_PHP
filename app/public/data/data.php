@@ -23,17 +23,17 @@ class Project {
   }
 
   // Methods
-  function set_name($name) {
+  function setName($name) {
     $this->name = $name;
   }
-  function get_name() {
+  function getName() {
     return $this->name;
   }
 
-  function set_description($description) {
+  function setDescription($description) {
     $this->description = $description;
   }
-  function get_description() {
+  function getDescription() {
     return $this->description;
   }
 }
@@ -116,8 +116,8 @@ function saveProjectsCookie($projects){
   // Convert the projects array to an array of associative arrays
   $projects_array = array_map(function($project) {
       return [
-          "name" => $project->get_name(),
-          "description" => $project->get_description()
+          "name" => $project->getName(),
+          "description" => $project->getDescription()
       ];
   }, $projects);
 
