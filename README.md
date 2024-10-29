@@ -39,6 +39,8 @@ cd Docker
 docker-compose up
 ```
 
+5. Open your [Localhost](127.0.0.1)
+
 ## Roadmap
 
 - [x] Pages & navigation
