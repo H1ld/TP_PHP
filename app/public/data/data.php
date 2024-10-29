@@ -41,7 +41,7 @@ class User {
   private $password;
   private $email;
   private $isAdmin;
-  //private $cv;
+  private $cv;
 
   public function __construct($username, $password, $email, $isAdmin) {
       $this->username = $username;
@@ -81,7 +81,7 @@ class User {
   public function setAdmin($isAdmin) {
       $this->isAdmin = $isAdmin;
   }
-/*
+
   public function getCV() {
     return $this->cv;
   }
@@ -89,7 +89,7 @@ class User {
   public function setCV(CV $cv) {
     $this->cv = $cv;
   }
-    */
+    
 }
 
 class CV {
