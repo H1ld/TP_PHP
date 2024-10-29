@@ -5,7 +5,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $newUser = new User($_POST['fullname'], $_POST['password'], $_POST['email'], FALSE);
             $users[] = $newUser;
             saveUsersCookie($users);
-            header("Location: profile.php");
+            header("Location: login.php");
         } else {
             $error = "Password confirmation does not match!";
         }

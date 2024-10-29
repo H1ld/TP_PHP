@@ -22,21 +22,13 @@ include 'data/data.php';
         <section>
             <h2>Featured CVs</h2>
             <div class="featured-cvs">
-                <div class="cv-card">
-                    <h3>John Doe 1</h3>
-                    <p>Software Developer</p>
-                    <a href="pages/profile.php" class="btn">View Profile</a>
-                </div>
-                <div class="cv-card">
-                    <h3>John Doe 2</h3>
-                    <p>Software Developer</p>
-                    <a href="pages/profile.php" class="btn">View Profile</a>
-                </div>
-                <div class="cv-card">
-                    <h3>John Doe 3</h3>
-                    <p>Software Developer</p>
-                    <a href="pages/profile.php" class="btn">View Profile</a>
-                </div>
+                <?php foreach ($users as $index => $user): ?>
+                    <div class="cv-card">
+                        <h3><?php echo $user->getUsername(); ?></h3>
+                        <p><?php echo $user->getEmail(); ?></p>
+                        <a href="pages/profile.php" class="btn">View Profile</a>
+                    </div>
+                <?php endforeach; ?>
             </div>
         </section>
         
