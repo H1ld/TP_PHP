@@ -13,7 +13,6 @@ $users = manageUsersCookie();
 #####################################################
 
 class Project {
-  // Attributes
   private $name;
   private $description;
 
@@ -22,7 +21,6 @@ class Project {
     $this->description = $description;
   }
 
-  // Methods
   function setName($name) {
     $this->name = $name;
   }
@@ -39,11 +37,11 @@ class Project {
 }
 
 class User {
-  // Attributes
   private $username;
   private $password;
   private $email;
   private $isAdmin;
+  //private $cv;
 
   public function __construct($username, $password, $email, $isAdmin) {
       $this->username = $username;
@@ -52,7 +50,6 @@ class User {
       $this->isAdmin = $isAdmin;
   }
 
-  // Methods
   public function getUsername() {
       return $this->username;
   }
@@ -84,6 +81,131 @@ class User {
   public function setAdmin($isAdmin) {
       $this->isAdmin = $isAdmin;
   }
+/*
+  public function getCV() {
+    return $this->cv;
+  }
+
+  public function setCV(CV $cv) {
+    $this->cv = $cv;
+  }
+    */
+}
+
+class CV {
+  private $name;
+  private $email;
+  private $phone;
+  private $address;
+  private $skills = [];
+  private $languages = [];
+
+  public function __construct($name, $email, $phone, $address) {
+      $this->name = $name;
+      $this->email = $email;
+      $this->phone = $phone;
+      $this->address = $address;
+  }
+
+  public function getName() {
+      return $this->name;
+  }
+
+  public function setName($name) {
+      $this->name = $name;
+  }
+
+  public function getEmail() {
+      return $this->email;
+  }
+
+  public function setEmail($email) {
+      $this->email = $email;
+  }
+
+  public function getPhone() {
+      return $this->phone;
+  }
+
+  public function setPhone($phone) {
+      $this->phone = $phone;
+  }
+
+  public function getAddress() {
+      return $this->address;
+  }
+
+  public function setAddress($address) {
+      $this->address = $address;
+  }
+
+  public function addSkill(Skill $skill) {
+      $this->skills[] = $skill;
+  }
+
+  public function getSkills() {
+      return $this->skills;
+  }
+
+  public function addLanguage(Language $language) {
+      $this->languages[] = $language;
+  }
+
+  public function getLanguages() {
+      return $this->languages;
+  }
+}
+
+class Skill {
+  private $title;
+  private $experience;
+
+  public function __construct($title, $experience) {
+      $this->title = $title;
+      $this->experience = $experience;
+  }
+
+  public function getTitle() {
+      return $this->title;
+  }
+
+  public function setTitle($title) {
+      $this->title = $title;
+  }
+
+  public function getExperience() {
+      return $this->experience;
+  }
+
+  public function setExperience($experience) {
+      $this->experience = $experience;
+  }
+}
+
+class Language {
+  private $name;
+  private $experience;
+
+  public function __construct($name, $experience) {
+      $this->name = $name;
+      $this->experience = $experience;
+  }
+
+  public function getName() {
+      return $this->name;
+  }
+
+  public function setName($name) {
+      $this->name = $name;
+  }
+
+  public function getExperience() {
+      return $this->experience;
+  }
+
+  public function setExperience($experience) {
+      $this->experience = $experience;
+  }
 }
 
 #####################################################
@@ -113,27 +235,11 @@ function createDefaultProjects(){
 }
 
 function saveProjectsCookie($projects){
-  // Convert the projects array to an array of associative arrays
-  $projects_array = array_map(function($project) {
-      return [
-          "name" => $project->getName(),
-          "description" => $project->getDescription()
-      ];
-  }, $projects);
-
-  $projects_json = json_encode($projects_array);
-  
-  setcookie("projects", $projects_json, time() + (86400 * 30), "/");
+  setcookie("projects", serialize($projects), time() + (86400 * 30), "/");
 }
 
 function retrieveProjectCookie(){
-  $projects_json = json_decode($_COOKIE['projects'], true);
-
-  $projects = [];
-  foreach ($projects_json as $project_data) {
-      $projects[] = new Project($project_data['name'], $project_data['description']);
-  }
-  return $projects;
+  return unserialize($_COOKIE['projects']);
 }
 
 ############### user cookies ###############
@@ -160,30 +266,11 @@ function createDefaultUsers(){
 }
 
 function saveUsersCookie($users){
-  // Convert the users array to an array of associative arrays
-    $users_array = array_map(function($user) {
-      return [
-          "username" => $user->getUsername(),
-          "password" => $user->getPassword(),
-          "email" => $user->getEmail(),
-          "isAdmin" => $user->isAdmin()
-      ];
-  }, $users);
-
-  $users_json = json_encode($users_array);
-
-  // Set the cookie with the user data (expires in 30 days)
-  setcookie("users", $users_json, time() + (86400 * 30), "/");
+  setcookie("users", serialize($users), time() + (86400 * 30), "/");
 }
 
 function retrieveUsersCookie(){
-  $users_json = json_decode($_COOKIE['users'], true); 
-
-  $users = [];
-  foreach ($users_json as $user_data) {
-      $users[] = new User($user_data['username'], $user_data['password'], $user_data['email'], $user_data['isAdmin']);
-  }
-  return $users;
+  return unserialize($_COOKIE['users']);
 }
 
 ?>
