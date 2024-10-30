@@ -32,23 +32,6 @@ include 'data/data.php';
             </tr>
             <?php endforeach; ?>
         </table>
-        
-        <br>
-        <br>
-
-        <table>
-            <tr>
-                <th>Name</th>
-                <th>Description</th>
-            </tr>
-            <?php foreach ($projects as $project): ?>
-            <tr>
-                <td><?php echo htmlspecialchars($project->getName()); ?></td>
-                <td><?php echo htmlspecialchars($project->getDescription()); ?></td>
-            </tr>
-            <?php endforeach; ?>
-        </table>
-
     </main>
 
     <?php include 'pages/includes/footer.php' ?>

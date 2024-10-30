@@ -1,11 +1,8 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    foreach ($users as $user){
+    foreach ($users as $index => $user){
         if ($_POST['username'] == $user->getUsername() && $_POST['password'] == $user->getPassword()) {
-            $_SESSION['name'] = $user->getUsername();
-            $_SESSION['email'] = $user->getEmail();
-            $_SESSION['isAdmin'] = $user->isAdmin();
-            $_SESSION['isLoggedIn'] = TRUE;
+            $_SESSION['LoggedInUserIndex'] = $user;
 
             $found = TRUE;
             break;

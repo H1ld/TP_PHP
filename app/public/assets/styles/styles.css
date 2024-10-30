@@ -79,6 +79,16 @@ h1, h2, h3 {
 ################# index.php #################
 */
 
+.home-btn{
+    font-size: 16px;
+    font-family: Arial;
+    line-height: 1.6;
+}
+
+.home-form{
+    display: block;
+}
+
 .featured-cvs {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));

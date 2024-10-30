@@ -5,8 +5,14 @@ session_start();
 #### THIS FILE GENERATES THE FOLLOWING VARIABLES ####
 #####################################################
 
-$projects = manageProjectsCookie();
 $users = manageUsersCookie();
+
+
+#### PLEASE KEEP IN MIND THESE SESSION VARIABLES ####
+/*
+UserProfileIndex : keeps the id of the user whose profile is being accessed
+LoggedInUserIndex : keeps the id of the user logged in
+*/
 
 #####################################################
 ###################### OBJECTS ######################
@@ -236,40 +242,8 @@ class Language {
 }
 
 #####################################################
-###################### COOKIES ######################
+###################### COOKIE #######################
 #####################################################
-
-############## project cookies ##############
-
-// create default cookie if none is set and retrieve projects datas from cookies 
-function manageProjectsCookie(){
-  if (!isset($_COOKIE['projects'])) {
-    $projectList = createDefaultProjects();
-    saveProjectsCookie($projectList);
-    header("Refresh:0");
-  } else {
-    return retrieveProjectCookie();
-  }
-}
-
-
-function createDefaultProjects(){
-  $projects = [];
-  $projects[] = new Project("Project 1", "Description of Project 1");
-  $projects[] = new Project("Project 2", "Description of Project 2");
-  $projects[] = new Project("Project 3", "Description of Project 3");
-  return $projects;
-}
-
-function saveProjectsCookie($projects){
-  setcookie("projects", serialize($projects), time() + (86400 * 30), "/");
-}
-
-function retrieveProjectCookie(){
-  return unserialize($_COOKIE['projects']);
-}
-
-############### user cookies ###############
 
 // create default cookie if none is set and retrieve users datas from cookies 
 function manageUsersCookie(){
@@ -286,9 +260,11 @@ function manageUsersCookie(){
 function createDefaultUsers(){
   $users = [];
   $users[] = new User("admin", "password123", "admin@example.com", TRUE);
+  $users[0]->addProject(new Project("Project 1", "Description of Project 1"));
   $users[] = new User("user_1", "123", "test1@example.com", FALSE);
   $users[] = new User("user_2", "123", "test2@example.com", FALSE);
   $users[] = new User("user_3", "123", "test3@example.com", FALSE);
+
   return $users;
 }
 

@@ -1,5 +1,7 @@
 <?php
 include 'data/data.php';
+
+include 'actions/handleHome.php';
 ?>
 
 
@@ -26,13 +28,19 @@ include 'data/data.php';
                     <div class="cv-card">
                         <h3><?php echo $user->getUsername(); ?></h3>
                         <p><?php echo $user->getEmail(); ?></p>
-                        <a href="pages/profile.php" class="btn">View Profile</a>
+
+                        <form class="home-form" method="post">
+                            <input type="hidden" name="UserProfileIndex" value="<?php echo $index; ?>">
+                            <button type="submit" class="btn home-btn">View Profile</button>
+                        </form>
+                    
+                    
                     </div>
                 <?php endforeach; ?>
             </div>
         </section>
         
-        <a href="signup.html" class="btn">Get Started</a>
+        <a href="pages/signup.php" class="btn">Get Started</a>
     </main>
 
     <?php include 'pages/includes/footer.php' ?>

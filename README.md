@@ -47,9 +47,9 @@ docker-compose up
 - [x] Data storage in cookies
 - [x] Basic account creation
 - [x] Admin panel
-- [ ] Link projects to users
+- [x] Link projects to users
+- [x] Display profiles on home page
 - [ ] Create an editable CV page for each user
-- [ ] Display profiles and projects on home page
 
 See the [open issues](https://github.com/H1ld/TP_PHP/issues) for a full list of proposed features (and known issues).
 
