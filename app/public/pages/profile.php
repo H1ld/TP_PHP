@@ -5,8 +5,8 @@ include '../data/data.php';
 include '../actions/handleProfile.php';
 ?>
 <?php if (isset($_SESSION['UserProfileIndex'])): 
-        $user = $users[$_SESSION['UserProfileIndex']];
-    ?>
+    $user = $users[$_SESSION['UserProfileIndex']];
+?>
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -26,6 +26,10 @@ include '../actions/handleProfile.php';
                 <p><strong>Username:</strong> <?php echo $user->getUsername(); ?></p>
                 <p><strong>Email:</strong> <?php echo $user->getEmail(); ?></p>
                 <p><strong>Profession:</strong> Software Developer</p>
+            </section>
+
+            <section class="text-center my-4">
+                <button onclick="window.location.href='CV.php'" class="btn">View Full CV</button>
             </section>
             
             <section>
