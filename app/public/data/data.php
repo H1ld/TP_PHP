@@ -173,7 +173,7 @@ class CV {
 
   public function removeLanguageByIndex($index) {
     if (isset($this->languages[$index])) {
-      array_splice(this->languages, $index, 1);
+      array_splice($this->languages, $index, 1);
     }
   }
   
