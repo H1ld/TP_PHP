@@ -7,8 +7,6 @@ include '../actions/handleCV.php';
 <?php if (isset($_SESSION['UserProfileIndex'])): 
     $user = $users[$_SESSION['UserProfileIndex']];
     $userCV = $user->getCV();
-    echo $_SESSION['UserProfileIndex'];
-    echo $_SESSION['LoggedInUserIndex'];
 ?>
     <!DOCTYPE html>
     <html lang="en">
