@@ -21,7 +21,7 @@ include '../actions/handleCV.php';
         <?php include 'includes/header.php' ?>
 
         <main class="container">
-            <h1>John Doe's CV</h1>
+            <h1><?php echo $user->getUsername();?>'s CV</h1>
             
             <button id="edit-cv-btn" class="btn">Edit CV</button>
 
