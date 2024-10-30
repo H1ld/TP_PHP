@@ -29,8 +29,10 @@ include '../actions/handleProfile.php';
             </section>
             
             <section>
-                <h2>Your Projects</h2>
+                <h2>Projects</h2>
+                <?php if (isset($_SESSION['UserProfileIndex']) && isset($_SESSION['LoggedInUserIndex']) && ($_SESSION['UserProfileIndex'] == $_SESSION['LoggedInUserIndex'] || $users[$_SESSION['LoggedInUserIndex']]->isAdmin())): ?>
                 <button id="add-project-btn" class="btn">Add New Project</button>
+                <?php endif; ?>
                 <ul class="project-list">
 
                     <?php foreach ($user->getProjects() as $index => $project): ?>
@@ -40,10 +42,12 @@ include '../actions/handleProfile.php';
                                 <p><?php echo $project->getDescription(); ?></p>
                             </div>
 
+                            <?php if (isset($_SESSION['UserProfileIndex']) && isset($_SESSION['LoggedInUserIndex']) && ($_SESSION['UserProfileIndex'] == $_SESSION['LoggedInUserIndex'] || $users[$_SESSION['LoggedInUserIndex']]->isAdmin())): ?>
                             <form method="post">
                                 <input type="hidden" name="removeProject" value="<?php echo $index; ?>">
                                 <button type="submit" class="delete-btn">Remove</button>
                             </form>
+                            <?php endif; ?>
 
                         </li>
                     <?php endforeach; ?>

@@ -2,7 +2,10 @@
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     foreach ($users as $index => $user){
         if ($_POST['username'] == $user->getUsername() && $_POST['password'] == $user->getPassword()) {
-            $_SESSION['LoggedInUserIndex'] = $user;
+            $_SESSION['LoggedInUserIndex'] = $index;
+            if (!isset($_SESSION['UserProfileIndex'])){
+                $_SESSION['UserProfileIndex'] = $index;
+            }
 
             $found = TRUE;
             break;
