@@ -12,36 +12,13 @@ $users = manageUsersCookie();
 ###################### OBJECTS ######################
 #####################################################
 
-class Project {
-  private $name;
-  private $description;
-
-  function __construct($name, $description) {
-    $this->name = $name;
-    $this->description = $description;
-  }
-
-  function setName($name) {
-    $this->name = $name;
-  }
-  function getName() {
-    return $this->name;
-  }
-
-  function setDescription($description) {
-    $this->description = $description;
-  }
-  function getDescription() {
-    return $this->description;
-  }
-}
-
 class User {
   private $username;
   private $password;
   private $email;
   private $isAdmin;
   private $cv;
+  private $projects = [];
 
   public function __construct($username, $password, $email, $isAdmin) {
       $this->username = $username;
@@ -89,7 +66,44 @@ class User {
   public function setCV(CV $cv) {
     $this->cv = $cv;
   }
-    
+   
+  public function addProject(Project $project) {
+    $this->projects[] = $project;
+  }
+
+  public function removeProject($index) {
+    if (isset($this->projects[$index])) {
+      array_splice($this->projects, $index, 1);
+    }
+  }
+
+  public function getProjects() {
+    return $this->projects;
+  }
+}
+
+class Project {
+  private $name;
+  private $description;
+
+  function __construct($name, $description) {
+    $this->name = $name;
+    $this->description = $description;
+  }
+
+  function setName($name) {
+    $this->name = $name;
+  }
+  function getName() {
+    return $this->name;
+  }
+
+  function setDescription($description) {
+    $this->description = $description;
+  }
+  function getDescription() {
+    return $this->description;
+  }
 }
 
 class CV {
@@ -143,6 +157,12 @@ class CV {
       $this->skills[] = $skill;
   }
 
+  public function removeSkillByIndex($index) {
+    if (isset($this->skills[$index])) {
+      array_splice($this->skills, $index, 1);
+    }
+  }
+
   public function getSkills() {
       return $this->skills;
   }
@@ -151,9 +171,16 @@ class CV {
       $this->languages[] = $language;
   }
 
+  public function removeLanguageByIndex($index) {
+    if (isset($this->languages[$index])) {
+      array_splice(this->languages, $index, 1);
+    }
+  }
+  
   public function getLanguages() {
       return $this->languages;
   }
+  
 }
 
 class Skill {
