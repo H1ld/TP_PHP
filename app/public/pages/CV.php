@@ -38,27 +38,18 @@ include '../actions/handleCV.php';
             <section class="cv-section">
                 <h2>Skills</h2>
                 <ul id="cv-skills" class="cv-list">
-                    <li>Web Development (HTML, CSS, JavaScript) - 5 years</li>
-                    <li>React.js - 3 years</li>
-                    <li>Node.js - 2 years</li>
-                    <li>Python - 4 years</li>
-                    <li>Database Management (SQL, MongoDB) - 3 years</li>
-                    <li>Version Control (Git) - 5 years</li>
-                    <li>Agile Methodologies - 2 years</li>
+                    <?php if (isset($userCV)) : echo $userCV->getskills(); endif?>
                 </ul>
             </section>
 
             <section class="cv-section">
                 <h2>Languages</h2>
                 <ul id="cv-languages" class="cv-list">
-                    <li>English - Native</li>
-                    <li>Spanish - Fluent</li>
-                    <li>French - Intermediate</li>
-                    <li>German - Basic</li>
+                    <?php if (isset($userCV)) : echo $userCV->getlanguages(); endif?>
                 </ul>
             </section>
 
-            <a href="profile.html" class="btn">Back to Profile</a>
+            <a href="profile.php" class="btn">Back to Profile</a>
         </main>
 
         <?php if (isset($_SESSION['UserProfileIndex']) && isset($_SESSION['LoggedInUserIndex']) && ($_SESSION['UserProfileIndex'] == $_SESSION['LoggedInUserIndex'] || $users[$_SESSION['LoggedInUserIndex']]->isAdmin())): ?>
@@ -79,21 +70,11 @@ include '../actions/handleCV.php';
                         <label for="edit-address">Address:</label>
                         <input type="text" id="edit-address" name="edit-address" value="<?php if (isset($userCV)) : echo $userCV->getAddress(); endif?>" required>
 
-                        <h3>Skills</h3>
-                        <div class="skills-input">
-                            <input type="text" id="skill-name" placeholder="Skill name" name="skill-name" value="">
-                            <input type="text" id="skill-experience" placeholder="Experience" name="skill-experience" value="">
-                            <button type="button" id="add-skill" class="btn">Add Skill</button>
-                        </div>
-                        <ul id="edit-skills" class="skills-list"></ul>
+                        <label for="edit-skills">Skills:</label>
+                        <input id="edit-skills" name="edit-skills" value = "<?php if (isset($userCV)) : echo $userCV->getskills(); endif?>"></input>
 
-                        <h3>Languages</h3>
-                        <div class="languages-input">
-                            <input type="text" id="language-name" placeholder="Language name" name="language-name" value="">
-                            <input type="text" id="language-proficiency" placeholder="Proficiency" name="language-proficiency" value="">
-                            <button type="button" id="add-language" class="btn">Add Language</button>
-                        </div>
-                        <ul id="edit-languages" class="languages-list"></ul>
+                        <label for="edit-languages">Languages:</label>
+                        <input id="edit-languages" name="edit-languages" value="<?php if (isset($userCV)) : echo $userCV->getlanguages(); endif?>"></input>
 
                         <button type="submit" class="btn">Save Changes</button>
                     </form>
@@ -119,20 +100,6 @@ include '../actions/handleCV.php';
 
             editCvBtn.addEventListener('click', () => {
                 editCvPopup.style.display = 'flex';
-                
-                // Populate skills list
-                editSkillsList.innerHTML = '';
-                Array.from(document.getElementById('cv-skills').children).forEach(li => {
-                    const [skill, experience] = li.textContent.split(' - ');
-                    addSkillToList(skill, experience);
-                });
-
-                // Populate languages list
-                editLanguagesList.innerHTML = '';
-                Array.from(document.getElementById('cv-languages').children).forEach(li => {
-                    const [language, proficiency] = li.textContent.split(' - ');
-                    addLanguageToList(language, proficiency);
-                });
             });
 
             closePopup.addEventListener('click', () => {
@@ -143,63 +110,6 @@ include '../actions/handleCV.php';
                 if (e.target === editCvPopup) {
                     editCvPopup.style.display = 'none';
                 }
-            });
-
-            addSkillBtn.addEventListener('click', () => {
-                const skillName = skillNameInput.value.trim();
-                const skillExperience = skillExperienceInput.value.trim();
-                if (skillName && skillExperience) {
-                    addSkillToList(skillName, skillExperience);
-                    skillNameInput.value = '';
-                    skillExperienceInput.value = '';
-                }
-            });
-
-            addLanguageBtn.addEventListener('click', () => {
-                const languageName = languageNameInput.value.trim();
-                const languageProficiency = languageProficiencyInput.value.trim();
-                if (languageName && languageProficiency) {
-                    addLanguageToList(languageName, languageProficiency);
-                    languageNameInput.value = '';
-                    languageProficiencyInput.value = '';
-                }
-            });
-
-            function addSkillToList(name, experience) {
-                const li = document.createElement('li');
-                li.className = 'skill-item';
-                li.innerHTML = `
-                    <span>${name} - ${experience}</span>
-                    <button type="button" class="btn remove-skill">Remove</button>
-                `;
-                li.querySelector('.remove-skill').addEventListener('click', () => li.remove());
-                editSkillsList.appendChild(li);
-            }
-
-            function addLanguageToList(name, proficiency) {
-                const li = document.createElement('li');
-                li.className = 'language-item';
-                li.innerHTML = `
-                    <span>${name} - ${proficiency}</span>
-                    <button type="button" class="btn remove-language">Remove</button>
-                `;
-                li.querySelector('.remove-language').addEventListener('click', () => li.remove());
-                editLanguagesList.appendChild(li);
-            }
-
-            editCvForm.addEventListener('submit', function(e) {
-                
-                const skillsList = document.getElementById('cv-skills');
-                skillsList.innerHTML = Array.from(editSkillsList.children)
-                    .map(li => `<li>${li.querySelector('span').textContent}</li>`)
-                    .join('');
-
-                const languagesList = document.getElementById('cv-languages');
-                languagesList.innerHTML = Array.from(editLanguagesList.children)
-                    .map(li => `<li>${li.querySelector('span').textContent}</li>`)
-                    .join('');
-
-                editCvPopup.style.display = 'none';
             });
         </script>
     </body>

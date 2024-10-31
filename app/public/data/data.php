@@ -117,14 +117,16 @@ class CV {
   private $email;
   private $phone;
   private $address;
-  private $skills = [];
-  private $languages = [];
+  private $skills;
+  private $languages;
 
-  public function __construct($name, $email, $phone, $address) {
+  public function __construct($name, $email, $phone, $address, $skills, $languages) {
       $this->name = $name;
       $this->email = $email;
       $this->phone = $phone;
       $this->address = $address;
+      $this->skills = $skills;
+      $this->languages = $languages;
   }
 
   public function getName() {
@@ -159,28 +161,16 @@ class CV {
       $this->address = $address;
   }
 
-  public function addSkill(Skill $skill) {
-      $this->skills[] = $skill;
-  }
-
-  public function removeSkillByIndex($index) {
-    if (isset($this->skills[$index])) {
-      array_splice($this->skills, $index, 1);
-    }
+  public function setSkill($skill) {
+      $this->skills = $skill;
   }
 
   public function getSkills() {
       return $this->skills;
   }
 
-  public function addLanguage(Language $language) {
-      $this->languages[] = $language;
-  }
-
-  public function removeLanguageByIndex($index) {
-    if (isset($this->languages[$index])) {
-      array_splice($this->languages, $index, 1);
-    }
+  public function setLanguage($language) {
+      $this->languages = $language;
   }
   
   public function getLanguages() {
@@ -189,57 +179,6 @@ class CV {
   
 }
 
-class Skill {
-  private $title;
-  private $experience;
-
-  public function __construct($title, $experience) {
-      $this->title = $title;
-      $this->experience = $experience;
-  }
-
-  public function getTitle() {
-      return $this->title;
-  }
-
-  public function setTitle($title) {
-      $this->title = $title;
-  }
-
-  public function getExperience() {
-      return $this->experience;
-  }
-
-  public function setExperience($experience) {
-      $this->experience = $experience;
-  }
-}
-
-class Language {
-  private $name;
-  private $experience;
-
-  public function __construct($name, $experience) {
-      $this->name = $name;
-      $this->experience = $experience;
-  }
-
-  public function getName() {
-      return $this->name;
-  }
-
-  public function setName($name) {
-      $this->name = $name;
-  }
-
-  public function getExperience() {
-      return $this->experience;
-  }
-
-  public function setExperience($experience) {
-      $this->experience = $experience;
-  }
-}
 
 #####################################################
 ###################### COOKIE #######################
