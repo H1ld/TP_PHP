@@ -198,14 +198,60 @@ function manageUsersCookie(){
 
 function createDefaultUsers(){
   $users = [];
-  $users[] = new User("admin", "password123", "admin@example.com", TRUE);
+
+  if (checkAdminSetterFile()){
+    $adminDatas = retrieveAdminInfo();
+    $users[] = new User($adminDatas[0], $adminDatas[1], $adminDatas[2], TRUE);
+  } else {
+    $users[] = new User("admin", "password123", "admin@example.com", TRUE);
+  }
+
   $users[0]->addProject(new Project("Project 1", "Description of Project 1"));
   $users[] = new User("user_1", "123", "test1@example.com", FALSE);
+  $users[1]->addProject(new Project("Project 1", "Description of Project 1"));
   $users[] = new User("user_2", "123", "test2@example.com", FALSE);
+  $users[2]->addProject(new Project("Project 1", "Description of Project 1"));
   $users[] = new User("user_3", "123", "test3@example.com", FALSE);
+  $users[3]->addProject(new Project("Project 1", "Description of Project 1"));
 
   return $users;
 }
+
+function checkAdminSetterFile(){
+  $file_path = '/app/public/admin.txt';
+
+
+  $file = fopen($file_path, 'r');
+    if (!$file) {
+        return false;
+    }
+    
+    $lineCount = 0;
+    while (!feof($file) && $lineCount < 3) {
+        $line = fgets($file);
+        if ($line !== false) {
+            $lineCount++;
+        }
+    }
+
+    fclose($file);
+    return $lineCount >= 3;
+}
+
+function retrieveAdminInfo(){
+  $file_path = '/app/public/admin.txt';
+
+  $file = fopen($file_path, 'r');
+  
+  $username = fgets($file);
+  $password = fgets($file);
+  $email = fgets($file);
+  
+  fclose($file);
+  return array($username, $password, $email);
+
+}
+
 
 function saveUsersCookie($users){
   setcookie("users", serialize($users), time() + (86400 * 30), "/");

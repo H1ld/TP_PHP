@@ -27,19 +27,21 @@ You will need to [Install Docker](https://docs.docker.com/engine/install/).
 git clone https://github.com/H1ld/TP_PHP
 ```
 
-2. Start the Docker engine
+2. Set admin's data in the admin.txt file
 
-3. Enter the Docker directory.
+3. Start the Docker engine
+
+4. Enter the Docker directory.
 ```
 cd Docker
 ```
 
-4. Build the Docker container.
+5. Build the Docker container.
 ```
 docker-compose up
 ```
 
-5. Open your [Localhost](127.0.0.1)
+6. Open your [Localhost](127.0.0.1)
 
 ## Roadmap
 
@@ -49,7 +51,8 @@ docker-compose up
 - [x] Admin panel
 - [x] Link projects to users
 - [x] Display profiles on home page
-- [ ] Create an editable CV page for each user
+- [x] Create an editable CV page for each user
+- [x] Make admin's data customisable
 
 See the [open issues](https://github.com/H1ld/TP_PHP/issues) for a full list of proposed features (and known issues).
 
