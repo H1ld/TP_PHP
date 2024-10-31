@@ -243,9 +243,9 @@ function retrieveAdminInfo(){
 
   $file = fopen($file_path, 'r');
   
-  $username = fgets($file);
-  $password = fgets($file);
-  $email = fgets($file);
+  $username = trim(fgets($file));
+  $password = trim(fgets($file));
+  $email = trim(fgets($file));
   
   fclose($file);
   return array($username, $password, $email);
