@@ -51,7 +51,7 @@ include 'actions/handleDB.php';
             <form action="" method="post" style="display:block">
             
             <label for="deleteUser">Delete user using ID:</label>
-            <input type="number" id="deleteUser" name="deleteUser" min="0" max="<?php echo count($users)-1?>" required>
+            <input type="number" id="deleteUser" name="deleteUser" min="1" max="<?php echo count($users)-1?>" required>
             
             <button type="submit" value="Login" class="btn">Delete user</button>
             </form>
